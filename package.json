@@ -1,6 +1,6 @@
 {
   "name": "sp-ui-pagecontainer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PageContainer React UI component for Super Project",
   "main": "index.js",
   "scripts": {

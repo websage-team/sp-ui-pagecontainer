@@ -24,8 +24,7 @@ export default class extends React.Component {
             // gaSetHalt(true)
             return (<div className="loading" id={this.id}>Loading...</div>)
         } else {
-            console.log(isAppReady)
-            if (__CLIENT__ && isAppReady) {
+            if (__CLIENT__) {
                 if (this.context.router && this.context.store) {
                     match({
                         routes: this.context.router.routes,

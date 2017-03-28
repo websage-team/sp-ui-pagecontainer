@@ -21,7 +21,6 @@ export default class extends React.Component {
 
     renderMain() {
         if (this.props.isLoading) {
-            // gaSetHalt(true)
             return (<div className="loading" id={this.id}>Loading...</div>)
         } else {
             if (__CLIENT__) {
@@ -32,7 +31,6 @@ export default class extends React.Component {
                     }, (error, redirectLocation, renderProps) => {
                         for (let component of renderProps.components) {
                             if (component && component.WrappedComponent && component.WrappedComponent.htmlExtends) {
-                                // console.log(component.WrappedComponent.htmlExtends)
                                 component.WrappedComponent.htmlExtends(
                                     {
                                         meta: []
@@ -45,13 +43,6 @@ export default class extends React.Component {
                     })
                 }
             }
-
-            // if (gaHalt) {
-            //     setTimeout(() => {
-            //         gaSetHalt(false)
-            //         pageview()
-            //     }, 0)
-            // }
 
             return (
                 <div id={this.id}>

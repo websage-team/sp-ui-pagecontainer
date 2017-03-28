@@ -9,6 +9,7 @@ const combineClassName = (...args) => {
     })
     return classNames.join(' ')
 }
+
 export default class extends React.Component {
     static contextTypes = {
         router: React.PropTypes.object,
@@ -53,7 +54,6 @@ export default class extends React.Component {
     }
 
     render() {
-        // console.log('reander')
         return (
             <div className={combineClassName(
                 'page-container',

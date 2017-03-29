@@ -1,8 +1,8 @@
 {
   "name": "sp-ui-pagecontainer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "PageContainer React UI component for Super Project",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -10,17 +10,33 @@ const combineClassName = (...args) => {
     return classNames.join(' ')
 }
 
+/**
+ * React component: PageContainer
+ * 
+ * @export
+ * @class
+ * @extends {React.Component}
+ * 
+ * @props {*string} className
+ * @props {*string} id
+ * @props {*boolean} isLoading - if true, will only render (<div className="loading" id={this.id}>Loading...</div>)
+ * @props {*boolean} isReady - only for className
+ * @props {*boolean} isError - only for className
+ * @props {*function} render - will run this function when renderMain() runs
+ */
 export default class extends React.Component {
     static contextTypes = {
         router: React.PropTypes.object,
         store: React.PropTypes.object
     }
-    
+
     get id() {
         return this.props.id || 'main-body'
     }
 
     renderMain() {
+        if (typeof this.props.render === 'function') this.props.render(this)
+
         if (this.props.isLoading) {
             return (<div className="loading" id={this.id}>Loading...</div>)
         } else {

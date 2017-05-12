@@ -51,9 +51,11 @@ export default class extends React.Component {
                                 component.WrappedComponent.htmlExtends(
                                     {
                                         meta: []
-                                    }, {
-                                        getState: () => this.context.store.getState()
-                                    }
+                                    },
+                                    this.context.store
+                                    // {
+                                    //     getState: () => this.context.store.getState()
+                                    // }
                                 )
                             }
                         }

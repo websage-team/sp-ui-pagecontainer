@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { match } from 'react-router'
 
 const combineClassName = (...args) => {
@@ -26,8 +27,8 @@ const combineClassName = (...args) => {
  */
 export default class extends React.Component {
     static contextTypes = {
-        router: React.PropTypes.object,
-        store: React.PropTypes.object
+        router: PropTypes.object,
+        store: PropTypes.object
     }
 
     get id() {

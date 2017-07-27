@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { match } from 'react-router'
+import HTMLExtendTool from 'super-project/src/ReactApp/HTMLExtendTool'
 
 const combineClassName = (...args) => {
     let classNames = []
@@ -20,26 +21,25 @@ const combineClassName = (...args) => {
  * 
  * @props {*string} className
  * @props {*string} id
- * @props {*boolean} isLoading - if true, will only render (<div className="loading" id={this.id}>Loading...</div>)
+ * @props {*boolean} isLoading - if true, will only render (<div className="loading">Loading...</div>)
  * @props {*boolean} isReady - only for className
  * @props {*boolean} isError - only for className
+ * @props {*(string|Component)} contentLoading - content/component for loading
  * @props {*function} render - will run this function when renderMain() runs
  */
-export default class extends React.Component {
+export default class SPPageContainer extends React.Component {
     static contextTypes = {
         router: PropTypes.object,
         store: PropTypes.object
-    }
-
-    get id() {
-        return this.props.id || 'main-body'
     }
 
     renderMain() {
         if (typeof this.props.render === 'function') this.props.render(this)
 
         if (this.props.isLoading) {
-            return (<div className="loading" id={this.id}>Loading...</div>)
+            return <div className="sp-pagecontainer-body loading">
+                {this.props.contentLoading || 'Loading...'}
+            </div>
         } else {
             if (__CLIENT__) {
                 if (this.context.router && this.context.store) {
@@ -48,15 +48,10 @@ export default class extends React.Component {
                         location: this.context.router.location
                     }, (error, redirectLocation, renderProps) => {
                         for (let component of renderProps.components) {
-                            if (component && component.WrappedComponent && component.WrappedComponent.htmlExtends) {
-                                component.WrappedComponent.htmlExtends(
-                                    {
-                                        meta: []
-                                    },
+                            if (component && component.WrappedComponent && component.WrappedComponent.onServerRenderHtmlExtend) {
+                                component.WrappedComponent.onServerRenderHtmlExtend(
+                                    new HTMLExtendTool(),
                                     this.context.store
-                                    // {
-                                    //     getState: () => this.context.store.getState()
-                                    // }
                                 )
                             }
                         }
@@ -65,7 +60,7 @@ export default class extends React.Component {
             }
 
             return (
-                <div id={this.id}>
+                <div className="sp-pagecontainer-body">
                     {this.props.children}
                 </div>
             )
@@ -75,7 +70,7 @@ export default class extends React.Component {
     render() {
         return (
             <div className={combineClassName(
-                'page-container',
+                'sp-pagecontainer',
 
                 this.props.className,
 

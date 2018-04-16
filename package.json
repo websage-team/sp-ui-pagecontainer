@@ -1,6 +1,6 @@
 {
   "name": "sp-ui-pagecontainer",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "PageContainer React UI component for Super Project",
   "main": "index.jsx",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/websage-team/sp-ui-pagecontainer",
   "peerDependencies": {
-    "super-project": ">=2",
+    "super-project": ">=3",
     "react": ">=16",
     "react-router": ">=3 <4",
     "prop-types": ">=15"

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { match } from 'react-router'
-import HTMLExtendTool from 'super-project/src/ReactApp/HTMLExtendTool'
+import HTMLExtendTool from 'super-project/ReactApp/HTMLExtendTool'
 
 const combineClassName = (...args) => {
     let classNames = []

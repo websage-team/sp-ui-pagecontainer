@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { match } from 'react-router'
-import HTMLExtendTool from 'super-project/ReactApp/HTMLExtendTool'
+import HTMLTool from 'super-project/ReactApp/HTMLTool'
 
 const combineClassName = (...args) => {
     let classNames = []
@@ -50,7 +50,7 @@ export default class SPPageContainer extends React.Component {
                         for (let component of renderProps.components) {
                             if (component && component.WrappedComponent && component.WrappedComponent.onServerRenderHtmlExtend) {
                                 component.WrappedComponent.onServerRenderHtmlExtend(
-                                    new HTMLExtendTool(),
+                                    new HTMLTool(),
                                     this.context.store
                                 )
                             }

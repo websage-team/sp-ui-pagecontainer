@@ -1,6 +1,6 @@
 {
   "name": "super-ui-pagecontainer",
-  "version": "3.0.0-alpha.2",
+  "version": "3.0.0-alpha.3",
   "description": "PageContainer React UI component for Super Project",
   "main": "index.jsx",
   "scripts": {

@@ -49,10 +49,10 @@ export default class SPPageContainer extends React.Component {
                     }, (error, redirectLocation, renderProps) => {
                         for (let component of renderProps.components) {
                             if (component && component.WrappedComponent && component.WrappedComponent.onServerRenderHtmlExtend) {
-                                component.WrappedComponent.onServerRenderHtmlExtend(
-                                    new HTMLTool(),
-                                    this.context.store
-                                )
+                                component.WrappedComponent.onServerRenderHtmlExtend({
+                                    htmlTool: new HTMLTool(),
+                                    store: this.context.store
+                                })
                             }
                         }
                     })

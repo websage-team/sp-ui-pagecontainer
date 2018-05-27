@@ -1,25 +1,28 @@
 {
-  "name": "super-ui-pagecontainer",
-  "version": "3.0.0-alpha.3",
-  "description": "PageContainer React UI component for Super Project",
+  "name": "super-ui-page",
+  "version": "3.0.7-alpha.1",
+  "description": "HOC for page component for Super Project",
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/websage-team/sp-ui-pagecontainer"
+    "url": "https://github.com/websage-team/super-ui-page"
   },
-  "author": "diablohudream@gmail.com",
+  "author": {
+      "name": "Diablohu",
+      "email": "diablohudream@gmail.com",
+      "url": "http://diablohu.com"
+  },
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/websage-team/sp-i18n/issues"
   },
-  "homepage": "https://github.com/websage-team/sp-ui-pagecontainer",
+  "homepage": "https://github.com/websage-team/super-ui-page",
   "peerDependencies": {
     "super-project": ">=3",
     "react": ">=16",
-    "react-router": ">=3 <4",
     "prop-types": ">=15"
   }
 }

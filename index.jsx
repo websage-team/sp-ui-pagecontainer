@@ -1,85 +1,55 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { match } from 'react-router'
-import HTMLTool from 'super-project/ReactApp/HTMLTool'
+// import { store } from 'super-project/ReactApp'
 
-const combineClassName = (...args) => {
-    let classNames = []
-    args.forEach(arg => {
-        arg = arg || ''
-        classNames = classNames.concat(arg.split(' ').filter(item => !(!item)))
-    })
-    return classNames.join(' ')
-}
+export default (funcGetPageInfo) => (WrappedComponent) => {
+    const getInfo = (store) => {
+        if (typeof funcGetPageInfo !== 'function') return
 
-/**
- * React component: PageContainer
- * 
- * @export
- * @class
- * @extends {React.Component}
- * 
- * @props {*string} className
- * @props {*string} id
- * @props {*boolean} isLoading - if true, will only render (<div className="loading">Loading...</div>)
- * @props {*boolean} isReady - only for className
- * @props {*boolean} isError - only for className
- * @props {*(string|Component)} contentLoading - content/component for loading
- * @props {*function} render - will run this function when renderMain() runs
- */
-export default class SPPageContainer extends React.Component {
-    static contextTypes = {
-        router: PropTypes.object,
-        store: PropTypes.object
-    }
+        let infos = funcGetPageInfo(store.getState())
+        if (typeof infos !== 'object') infos = {}
 
-    renderMain() {
-        if (typeof this.props.render === 'function') this.props.render(this)
-
-        if (this.props.isLoading) {
-            return <div className="sp-pagecontainer-body loading">
-                {this.props.contentLoading || 'Loading...'}
-            </div>
-        } else {
-            if (__CLIENT__) {
-                if (this.context.router && this.context.store) {
-                    match({
-                        routes: this.context.router.routes,
-                        location: this.context.router.location
-                    }, (error, redirectLocation, renderProps) => {
-                        for (let component of renderProps.components) {
-                            if (component && component.WrappedComponent && component.WrappedComponent.onServerRenderHtmlExtend) {
-                                component.WrappedComponent.onServerRenderHtmlExtend({
-                                    htmlTool: new HTMLTool(),
-                                    store: this.context.store
-                                })
-                            }
-                        }
-                    })
-                }
-            }
-
-            return (
-                <div className="sp-pagecontainer-body">
-                    {this.props.children}
-                </div>
-            )
+        return {
+            title: infos.title || '',
+            metas: infos.metas || []
         }
     }
 
-    render() {
-        return (
-            <div className={combineClassName(
-                'sp-pagecontainer',
+    class SuperPage extends Component {
+        static contextTypes = {
+            store: PropTypes.object
+        }
+        static onServerRenderHtmlExtend = ({ htmlTool, store }) => {
+            const infos = getInfo(store)
+            htmlTool.title = infos.title
+            htmlTool.metas = infos.metas
+        }
 
-                this.props.className,
+        componentDidMount() {
+            const infos = getInfo(this.context.store)
 
-                this.props.isLoading ? 'is-loading' : '',
-                this.props.isReady ? 'is-ready' : '',
-                this.props.isError ? 'is-error' : ''
-            )}>
-                {this.renderMain()}
-            </div>
-        )
+            // 替换页面标题
+            document.title = infos.title
+
+            // 替换 metas
+            const head = document.getElementsByTagName('head')[0]
+            head.innerHTML = head.innerHTML.replace(
+                /<!--SUPER_METAS_START-->(.*?)<!--SUPER_METAS_END-->/g,
+                `<!--SUPER_METAS_START-->${infos.metas
+                    .filter(meta => typeof meta === 'object')
+                    .map(meta => {
+                        let str = '<meta'
+                        for (var key in meta) {
+                            str += ` ${key}="${meta[key]}"`
+                        }
+                        str += '>'
+                        return str
+                    }).join('')}<!--SUPER_METAS_END-->`
+            )
+        }
+
+        render = () => <WrappedComponent {...this.props} />
     }
+
+    return SuperPage
 }

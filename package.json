@@ -1,6 +1,6 @@
 {
   "name": "super-ui-page",
-  "version": "3.0.7-alpha.1",
+  "version": "3.0.7-alpha.2",
   "description": "HOC for page component for Super Project",
   "main": "index.jsx",
   "scripts": {

@@ -1,28 +1,34 @@
 {
-  "name": "super-ui-page",
-  "version": "3.0.7-alpha.2",
-  "description": "HOC for page component for Super Project",
-  "main": "index.jsx",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/websage-team/super-ui-page"
-  },
-  "author": {
-      "name": "Diablohu",
-      "email": "diablohudream@gmail.com",
-      "url": "http://diablohu.com"
-  },
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/websage-team/sp-i18n/issues"
-  },
-  "homepage": "https://github.com/websage-team/super-ui-page",
-  "peerDependencies": {
-    "super-project": ">=3",
-    "react": ">=16",
-    "prop-types": ">=15"
-  }
+    "name": "super-ui-page",
+    "version": "3.0.7-alpha.2",
+    "description": "HOC for page component for Super Project",
+    "main": "index.jsx",
+    "scripts": {
+        "eslint": "eslint **/*.+(js|jsx)",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/websage-team/super-ui-page"
+    },
+    "author": {
+        "name": "Diablohu",
+        "email": "diablohudream@gmail.com",
+        "url": "http://diablohu.com"
+    },
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/websage-team/sp-i18n/issues"
+    },
+    "homepage": "https://github.com/websage-team/super-ui-page",
+    "devDependencies": {
+        "eslint": "^4.19.1",
+        "eslint-plugin-react": "^7.9.1",
+        "babel-eslint": "^8.2.3"
+    },
+    "peerDependencies": {
+        "super-project": ">=3",
+        "react": ">=16",
+        "prop-types": ">=15"
+    }
 }
